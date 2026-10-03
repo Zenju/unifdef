@@ -815,22 +815,21 @@ parseline(void)
 				retval = (retval == LT_TRUE)
 				    ? LT_TRUEI : LT_FALSEI;
 		}
-	} else if ((cp = matchsym("elifdef",  keyword)) != NULL ||
-               (cp = matchsym("elifndef", keyword)) != NULL) {
+	}
+	else if ((cp = matchsym("elifdef",  keyword)) != NULL ||
+             (cp = matchsym("elifndef", keyword)) != NULL) {
         cp = skipcomment(cp);
-        if ((cursym = findsym(&cp)) < 0) {
+        if ((cursym = findsym(&cp)) < 0)
             retval = LT_ELIF;
-        } else {
+        else {
             // keyword[4] is 'n' for "elifndef", 'd' for "elifdef"
             retval = (keyword[4] == 'n') ? LT_ELFALSE : LT_ELTRUE;
 
-            if (value[cursym] == NULL) {
+            if (value[cursym] == NULL)
                 retval = (retval == LT_ELTRUE) ? LT_ELFALSE : LT_ELTRUE;
-            }
 
-            if (ignore[cursym]) {
+            if (ignore[cursym])
                 retval = (retval == LT_ELTRUE) ? LT_TRUEI : LT_FALSEI;
-            }
         }
     }
 	else if ((cp = matchsym("if", keyword)) != NULL)
