@@ -821,13 +821,8 @@ parseline(void)
         cp = skipcomment(cp);
         if ((cursym = findsym(&cp)) < 0)
             retval = LT_ELIF;
-        else {
-            // keyword[4] is 'n' for "elifndef", 'd' for "elifdef"
-            retval = (keyword[4] == 'n') ? LT_ELFALSE : LT_ELTRUE;
-
-            if (value[cursym] == NULL)
-                retval = (retval == LT_ELTRUE) ? LT_ELFALSE : LT_ELTRUE;
-        }
+        else
+			retval = ((value[cursym] != NULL) == (keyword[4] == 'd')) ? LT_ELTRUE : LT_ELFALSE;
     }
 	else if ((cp = matchsym("if", keyword)) != NULL)
 		retval = ifeval(&cp);
