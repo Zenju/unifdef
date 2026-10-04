@@ -827,9 +827,6 @@ parseline(void)
 
             if (value[cursym] == NULL)
                 retval = (retval == LT_ELTRUE) ? LT_ELFALSE : LT_ELTRUE;
-
-            if (ignore[cursym])
-                retval = (retval == LT_ELTRUE) ? LT_TRUEI : LT_FALSEI;
         }
     }
 	else if ((cp = matchsym("if", keyword)) != NULL)
